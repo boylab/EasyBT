@@ -51,9 +51,9 @@ public class ServerActionDispatcher implements IRegister<IServerActionListener, 
     /**
      * 服务器管理器实例
      */
-    private volatile IServerManager<com.boylab.socket.server.impl.OkServerOptions> mServerManager;
+    private volatile IServerManager<OkServerOptions> mServerManager;
 
-    public ServerActionDispatcher(IServerManager<com.boylab.socket.server.impl.OkServerOptions> manager) {
+    public ServerActionDispatcher(IServerManager<OkServerOptions> manager) {
         this.mServerManager = manager;
     }
 
@@ -66,7 +66,7 @@ public class ServerActionDispatcher implements IRegister<IServerActionListener, 
     }
 
     @Override
-    public IServerManager<com.boylab.socket.server.impl.OkServerOptions> registerReceiver(final IServerActionListener socketResponseHandler) {
+    public IServerManager<OkServerOptions> registerReceiver(final IServerActionListener socketResponseHandler) {
         if (socketResponseHandler != null) {
             synchronized (mResponseHandlerList) {
                 if (!mResponseHandlerList.contains(socketResponseHandler)) {

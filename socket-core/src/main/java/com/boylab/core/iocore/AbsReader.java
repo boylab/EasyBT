@@ -12,11 +12,11 @@ import java.io.InputStream;
  * Created by Tony on 2017/12/26.
  */
 
-public abstract class AbsReader implements IReader<com.boylab.core.iocore.interfaces.IIOCoreOptions> {
+public abstract class AbsReader implements IReader<IIOCoreOptions> {
 
-    protected volatile com.boylab.core.iocore.interfaces.IIOCoreOptions mOkOptions;
+    protected volatile IIOCoreOptions mOkOptions;
 
-    protected com.boylab.core.iocore.interfaces.IStateSender mStateSender;
+    protected IStateSender mStateSender;
 
     protected InputStream mInputStream;
 

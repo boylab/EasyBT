@@ -20,7 +20,7 @@ public class ReaderImpl extends AbsReader {
 
     @Override
     public void read() throws RuntimeException {
-        com.boylab.core.pojo.OriginalData originalData = new OriginalData();
+        OriginalData originalData = new OriginalData();
         IReaderProtocol headerProtocol = mOkOptions.getReaderProtocol();
         ByteBuffer headBuf = ByteBuffer.allocate(headerProtocol.getHeaderLength());
         headBuf.order(mOkOptions.getReadByteOrder());
@@ -49,7 +49,7 @@ public class ReaderImpl extends AbsReader {
             }
             if (bodyLength > 0) {
                 if (bodyLength > mOkOptions.getMaxReadDataMB() * 1024 * 1024) {
-                    throw new com.boylab.core.exceptions.ReadException("Need to follow the transmission protocol.\r\n" +
+                    throw new ReadException("Need to follow the transmission protocol.\r\n" +
                             "Please check the client/server code.\r\n" +
                             "According to the packet header data in the transport protocol, the package length is " + bodyLength + " Bytes.\r\n" +
                             "You need check your <ReaderProtocol> definition");
@@ -72,7 +72,7 @@ public class ReaderImpl extends AbsReader {
                         }
                         //cause this time data from remaining buffer not from channel.
                         originalData.setBodyBytes(byteBuffer.array());
-                        mStateSender.sendBroadcast(com.boylab.core.iocore.interfaces.IOAction.ACTION_READ_COMPLETE, originalData);
+                        mStateSender.sendBroadcast(IOAction.ACTION_READ_COMPLETE, originalData);
                         return;
                     } else {//there are no data left in buffer and some data pieces in channel
                         mRemainingBuf = null;
@@ -94,12 +94,12 @@ public class ReaderImpl extends AbsReader {
                     }
                 }
             } else if (bodyLength < 0) {
-                throw new com.boylab.core.exceptions.ReadException(
+                throw new ReadException(
                         "read body is wrong,this socket input stream is end of file read " + bodyLength + " ,that mean this socket is disconnected by server");
             }
             mStateSender.sendBroadcast(IOAction.ACTION_READ_COMPLETE, originalData);
         } catch (Exception e) {
-            com.boylab.core.exceptions.ReadException readException = new com.boylab.core.exceptions.ReadException(e);
+            ReadException readException = new ReadException(e);
             throw readException;
         }
     }

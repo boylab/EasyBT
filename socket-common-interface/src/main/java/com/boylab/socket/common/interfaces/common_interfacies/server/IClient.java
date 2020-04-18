@@ -16,7 +16,7 @@ public interface IClient extends IDisConnectable, ISender<IClient>, Serializable
 
     void setReaderProtocol(IReaderProtocol protocol);
 
-    void addIOCallback(com.boylab.socket.common.interfaces.common_interfacies.server.IClientIOCallback clientIOCallback);
+    void addIOCallback(IClientIOCallback clientIOCallback);
 
     void removeIOCallback(IClientIOCallback clientIOCallback);
 

@@ -20,11 +20,11 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Created by xuhao on 2017/5/31.
  */
 
-public class WriterImpl implements IWriter<com.boylab.core.iocore.interfaces.IIOCoreOptions> {
+public class WriterImpl implements IWriter<IIOCoreOptions> {
 
-    private volatile com.boylab.core.iocore.interfaces.IIOCoreOptions mOkOptions;
+    private volatile IIOCoreOptions mOkOptions;
 
-    private com.boylab.core.iocore.interfaces.IStateSender mStateSender;
+    private IStateSender mStateSender;
 
     private OutputStream mOutputStream;
 
@@ -74,12 +74,12 @@ public class WriterImpl implements IWriter<com.boylab.core.iocore.interfaces.IIO
                     remainingCount -= realWriteLength;
                 }
                 if (sendable instanceof IPulseSendable) {
-                    mStateSender.sendBroadcast(com.boylab.core.iocore.interfaces.IOAction.ACTION_PULSE_REQUEST, sendable);
+                    mStateSender.sendBroadcast(IOAction.ACTION_PULSE_REQUEST, sendable);
                 } else {
                     mStateSender.sendBroadcast(IOAction.ACTION_WRITE_COMPLETE, sendable);
                 }
             } catch (Exception e) {
-                com.boylab.core.exceptions.WriteException writeException = new WriteException(e);
+                WriteException writeException = new WriteException(e);
                 throw writeException;
             }
             return true;

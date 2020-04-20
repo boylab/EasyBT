@@ -1,2 +1,2 @@
 rootProject.name='EasyBT'
-include ':app', ':socket-core', ':socket-client', ':socket-common-interface', ':socket-server'
+include ':app', ':socket-core', ':socket-client', ':socket-common-interface'/*, ':socket-server'*/

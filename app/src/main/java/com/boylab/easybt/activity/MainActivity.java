@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.boylab.core.iocore.interfaces.IPulseSendable;
+import com.boylab.core.iocore.interfaces.ISendable;
+import com.boylab.core.pojo.OriginalData;
 import com.boylab.easybt.R;
 import com.boylab.easybt.ReaderProtocol;
 import com.boylab.socket.client.impl.client.action.ActionDispatcher;

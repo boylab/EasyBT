@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -42,6 +43,7 @@ public class ScanActivity extends AppCompatActivity {
     private Button btn_Scan;
     private ListView lv_Scan;
     private List<BluetoothDevice> btDeviceList;
+    private ScanActivity ScanActivityPermissionsDispatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,10 +125,11 @@ public class ScanActivity extends AppCompatActivity {
     void onLocationNeeds() {
     }
 
+    @SuppressLint("NeedOnRequestPermissionsResult")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        ScanActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+        ScanActivityPermissionsDispatcher.onRequestPermissionsResult(requestCode,permissions, grantResults);
     }
 
     @OnShowRationale({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
